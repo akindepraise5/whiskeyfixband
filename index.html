@@ -19,8 +19,71 @@
             color: #e5e5e5;
         }
 
-        .hero-bg {
-            /* Updated: More dramatic stage lighting */
+        /* Animation Keyframes */
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.15);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        .animate-ken-burns {
+            animation: kenBurns 20s ease-in-out infinite alternate;
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            /* Start hidden */
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-500 {
+            animation-delay: 0.8s;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
             background-image: url("https://images.unsplash.com/photo-1517457388701-073840af7c9b?q=80&w=2070&auto=format&fit=crop");
             background-size: cover;
             background-position: center;
@@ -29,7 +92,7 @@
         .grain-overlay {
             /* Mimics the grain effect */
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.03;
+            opacity: 0.04;
             mix-blend-mode: overlay;
             pointer-events: none;
         }
@@ -56,6 +119,7 @@
             background: linear-gradient(to right, #f59e0b, #d97706);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.3));
         }
     </style>
     <!-- Lucide Icons for HTML -->
@@ -112,34 +176,42 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Updated to match image layout and text) -->
-    <header class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
+    <!-- Hero Section (Updated with Animations) -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Background Container -->
+        <div class="hero-image-container animate-ken-burns"></div>
+
         <div class="absolute inset-0 z-0">
             <!-- Darker overlay to enhance drama -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/50 to-black/90"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-black/80"></div>
             <div class="absolute inset-0 grain-overlay"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
 
-            <!-- New Preamble Text (EST. 2018 • NASHVILLE, TN) -->
-            <p class="text-sm font-bold uppercase tracking-widest text-amber-500 mb-6">
+            <!-- New Preamble Text (Animated) -->
+            <p class="text-sm font-bold uppercase tracking-widest text-amber-500 mb-6 animate-fade-in-up delay-100">
                 EST. 2018 • NASHVILLE, TN
             </p>
 
+            <!-- Main Title (Animated) -->
             <h1
-                class="text-7xl md:text-8xl lg:text-[10rem] font-black uppercase text-white mb-6 leading-none shadow-black drop-shadow-2xl">
+                class="text-7xl md:text-8xl lg:text-[10rem] font-black uppercase text-white mb-6 leading-none shadow-black drop-shadow-2xl animate-fade-in-up delay-200">
                 WHISKEY<span class="text-gradient">FIX</span>
             </h1>
-            <p class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+
+            <!-- Subtext (Animated) -->
+            <p
+                class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed animate-fade-in-up delay-300">
                 The premier high-energy rock & blues experience. <br />
                 <span class="text-white font-medium">Available for festivals, private events, and venues.</span>
             </p>
 
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+            <!-- Buttons (Animated) -->
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center animate-fade-in-up delay-500">
                 <!-- Check Availability Button (Orange) -->
                 <a href="#contact"
-                    class="w-full md:w-auto px-12 py-4 bg-amber-600 hover:bg-amber-700 text-black font-bold uppercase tracking-widest transition-all transform hover:scale-[1.02] shadow-xl shadow-amber-900/50 flex items-center justify-center gap-2 rounded-sm">
+                    class="w-full md:w-auto px-12 py-4 bg-amber-600 hover:bg-amber-700 text-black font-bold uppercase tracking-widest transition-all transform hover:scale-[1.05] shadow-xl shadow-amber-900/50 flex items-center justify-center gap-2 rounded-sm ring-2 ring-transparent hover:ring-white/20">
                     <i data-lucide="clipboard-check" class="w-4 h-4"></i>
                     CHECK AVAILABILITY
                 </a>
@@ -226,8 +298,10 @@
             <div class="flex flex-col gap-16">
 
                 <!-- CENTERED: Booking/Promoter Audio Player (Utility) -->
+                <!-- Main Layout Fix: Ensure the card container is centered -->
                 <div class="w-full max-w-5xl mx-auto">
                     <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 lg:p-10 shadow-2xl">
+                        <!-- Header Content: Centered -->
                         <div class="text-center mb-8">
                             <h3
                                 class="text-2xl font-black text-white uppercase tracking-wider flex items-center justify-center gap-3">
@@ -238,8 +312,8 @@
                                 for Booking Agents</p>
                         </div>
 
-                        <!-- Tabs -->
-                        <div class="flex p-1 bg-black rounded-lg mb-6 max-w-lg mx-auto border border-zinc-800">
+                        <!-- Tabs: Updated max-w to match the list (from max-w-lg to max-w-3xl) -->
+                        <div class="flex p-1 bg-black rounded-lg mb-6 max-w-3xl mx-auto border border-zinc-800">
                             <button data-tab="studio"
                                 class="audio-tab flex-1 py-3 text-xs md:text-sm font-bold uppercase rounded-md transition-all bg-amber-600 text-white">
                                 Studio
@@ -250,11 +324,12 @@
                             </button>
                         </div>
 
-                        <!-- Player List Container -->
+                        <!-- Player List Container: Centered max-w-3xl -->
                         <div id="audio-list" class="space-y-3 max-w-3xl mx-auto">
                             <!-- Tracks rendered by JavaScript -->
                         </div>
 
+                        <!-- Download Button: Centered max-w-3xl -->
                         <div class="mt-8 pt-6 border-t border-zinc-800 max-w-3xl mx-auto">
                             <button
                                 class="w-full py-4 border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-widest rounded-sm flex items-center justify-center gap-2 transition-colors">
@@ -264,15 +339,39 @@
                     </div>
                 </div>
 
-                <!-- BOTTOM GRID: Discography & Video (Visuals) -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- BOTTOM GRID: Video & Discography Stacked for Impact -->
+                <div class="flex flex-col gap-16">
 
-                    <!-- Discography -->
-                    <div class="lg:col-span-5">
+                    <!-- Video Section (Moved Top for Emphasis) -->
+                    <div class="w-full">
+                        <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
+                            <i data-lucide="youtube" class="w-5 h-5 text-amber-600"></i> Featured Performance
+                        </h3>
+                        <div
+                            class="aspect-video bg-zinc-900 rounded-sm overflow-hidden relative group cursor-pointer shadow-2xl w-full">
+                            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=2070&auto=format&fit=crop"
+                                class="w-full h-full object-cover opacity-80" alt="Live at The Ryman video cover"
+                                onerror="this.onerror=null;this.src='https://placehold.co/1000x562/171717/ffffff?text=Live+Performance+Video';" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="w-20 h-20 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
+                                    <i data-lucide="play" class="w-8 h-8 fill-white ml-1 text-white"></i>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute bottom-6 left-6 bg-black/80 px-4 py-2 rounded-sm border-l-4 border-amber-600">
+                                <span class="text-white text-base font-bold uppercase tracking-wider">Live at The Ryman
+                                    (2024)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discography (Row of 3) -->
+                    <div class="w-full">
                         <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
                             <i data-lucide="disc" class="w-5 h-5 text-amber-600"></i> Latest Releases
                         </h3>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                             <!-- Album 1 -->
                             <div class="group cursor-pointer">
                                 <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
@@ -303,8 +402,8 @@
                                 <h4 class="text-white font-bold text-sm leading-tight">Last Call</h4>
                                 <p class="text-zinc-500 text-xs">Single • 2023</p>
                             </div>
-                            <!-- Album 3 (Hidden on mobile or squeezed? Let's keep 2 cols or move to carousel later if needed. For now 2 cols is cleaner than 3 small ones in this space) -->
-                            <div class="group cursor-pointer hidden md:block">
+                            <!-- Album 3 (Shown on all screens now) -->
+                            <div class="group cursor-pointer">
                                 <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
                                     <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -317,30 +416,6 @@
                                 </div>
                                 <h4 class="text-white font-bold text-sm leading-tight">Live Sessions</h4>
                                 <p class="text-zinc-500 text-xs">EP • 2022</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Video Section -->
-                    <div class="lg:col-span-7">
-                        <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
-                            <i data-lucide="youtube" class="w-5 h-5 text-amber-600"></i> Featured Performance
-                        </h3>
-                        <div
-                            class="aspect-video bg-zinc-900 rounded-sm overflow-hidden relative group cursor-pointer shadow-2xl">
-                            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=2070&auto=format&fit=crop"
-                                class="w-full h-full object-cover opacity-80" alt="Live at The Ryman video cover"
-                                onerror="this.onerror=null;this.src='https://placehold.co/1000x562/171717/ffffff?text=Live+Performance+Video';" />
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div
-                                    class="w-20 h-20 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
-                                    <i data-lucide="play" class="w-8 h-8 fill-white ml-1 text-white"></i>
-                                </div>
-                            </div>
-                            <div
-                                class="absolute bottom-6 left-6 bg-black/80 px-4 py-2 rounded-sm border-l-4 border-amber-600">
-                                <span class="text-white text-base font-bold uppercase tracking-wider">Live at The Ryman
-                                    (2024)</span>
                             </div>
                         </div>
                     </div>
