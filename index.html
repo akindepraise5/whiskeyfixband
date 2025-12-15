@@ -1,200 +1,200 @@
-import React, { useState, useEffect } from 'react';
-import { Play, Pause, Calendar, Mail, Instagram, Facebook, Youtube, Music, ArrowRight, Menu, X, CheckCircle, Volume2,
-Mic2, Disc, FileText, Download, ChevronDown, ChevronUp } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
 
-const App = () => {
-const [isScrolled, setIsScrolled] = useState(false);
-const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-const [activeAudioTab, setActiveAudioTab] = useState('studio');
-const [playingTrack, setPlayingTrack] = useState(null);
-const [setlistOpen, setSetlistOpen] = useState(false);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whiskey Fix - Industry-Level Band EPK</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
 
-// Handle scroll for sticky navbar styling
-useEffect(() => {
-const handleScroll = () => {
-setIsScrolled(window.scrollY > 50);
-};
-window.addEventListener('scroll', handleScroll);
-return () => window.removeEventListener('scroll', handleScroll);
-}, []);
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
 
-const togglePlay = (trackId) => {
-if (playingTrack === trackId) {
-setPlayingTrack(null);
-} else {
-setPlayingTrack(trackId);
-}
-};
+        .hero-bg {
+            background-image: url("https://images.unsplash.com/photo-1470229722913-7ea995968f55?q=80&w=2070&auto=format&fit=crop");
+            background-size: cover;
+            background-position: center;
+        }
 
-const studioTracks = [
-{ id: 1, title: "Midnight Rambler", duration: "3:45", type: "Original" },
-{ id: 2, title: "Whiskey River", duration: "4:12", type: "Original" },
-{ id: 3, title: "Hard to Handle", duration: "3:30", type: "Cover" }
-];
+        .grain-overlay {
+            /* Mimics the grain effect */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
 
-const liveTracks = [
-{ id: 4, title: "Live at The Mercury (Crowd Demo)", duration: "4:05", type: "Live Board Feed" },
-{ id: 5, title: "Mustang Sally (Live Improv)", duration: "5:20", type: "Audience Rec" },
-{ id: 6, title: "Festival Soundcheck 2024", duration: "2:15", type: "Soundcheck" }
-];
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-const currentTracks = activeAudioTab === 'studio' ? studioTracks : liveTracks;
+        ::-webkit-scrollbar-track {
+            background: #1f1f1f;
+        }
 
-const albums = [
-{ title: "Grit & Gold", type: "LP • 2024", img:
-"https://images.unsplash.com/photo-1535905557558-afc4877a26fc?q=80&w=1000&auto=format&fit=crop" },
-{ title: "Last Call", type: "Single • 2023", img:
-"https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop" },
-{ title: "Live Sessions", type: "EP • 2022", img:
-"https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop" }
-];
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
 
-return (
-<div className="font-sans text-gray-100 bg-[#0a0a0a] min-h-screen selection:bg-amber-600 selection:text-white">
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
 
-    {/* Navigation */}
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-black/95 backdrop-blur-sm shadow-lg py-3 border-b border-zinc-800' : 'bg-transparent py-6' }`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-            <div className="flex items-center gap-2">
+        .text-gradient {
+            background: linear-gradient(to right, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <!-- Lucide Icons for HTML -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-[#0a0a0a] min-h-screen">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
                 <span
-                    className="text-xl md:text-2xl font-black tracking-tighter uppercase text-white border-2 border-white px-2 py-1">
-                    Whiskey<span className="text-amber-500">Fix</span>
+                    class="text-xl md:text-2xl font-black tracking-tighter uppercase text-white border-2 border-white px-2 py-1">
+                    Whiskey<span class="text-amber-500">Fix</span>
                 </span>
-            </div>
+            </a>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8 text-xs md:text-sm font-bold tracking-widest uppercase">
-                <a href="#about" className="hover:text-amber-500 transition-colors">About</a>
-                <a href="#media" className="hover:text-amber-500 transition-colors">Media Hub</a>
-                <a href="#experience" className="hover:text-amber-500 transition-colors">Live & Setlist</a>
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold tracking-widest uppercase">
+                <a href="#about" class="hover:text-amber-500 transition-colors">About</a>
+                <a href="#media" class="hover:text-amber-500 transition-colors">Media Hub</a>
+                <a href="#experience" class="hover:text-amber-500 transition-colors">Live & Setlist</a>
                 <a href="#contact"
-                    className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold transition-colors rounded-sm flex items-center gap-2">
+                    class="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold transition-colors rounded-sm flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
                     Book Now
                 </a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button className="md:hidden text-white" onClick={()=> setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ?
-                <X size={24} /> :
-                <Menu size={24} />}
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
-        {/* Mobile Menu Overlay */}
-        {mobileMenuOpen && (
-        <div
-            className="absolute top-full left-0 w-full bg-zinc-900 border-t border-zinc-800 p-6 flex flex-col gap-6 md:hidden shadow-2xl animate-in slide-in-from-top-5">
-            <a href="#about" onClick={()=> setMobileMenuOpen(false)} className="text-lg font-bold hover:text-amber-500
-                uppercase tracking-wider">The Band</a>
-            <a href="#media" onClick={()=> setMobileMenuOpen(false)} className="text-lg font-bold hover:text-amber-500
-                uppercase tracking-wider">Media Hub</a>
-            <a href="#experience" onClick={()=> setMobileMenuOpen(false)} className="text-lg font-bold
-                hover:text-amber-500 uppercase tracking-wider">Live Experience</a>
-            <a href="#contact" onClick={()=> setMobileMenuOpen(false)} className="w-full text-center py-4 bg-amber-600
-                text-white font-bold uppercase tracking-widest">
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 w-full bg-zinc-900 border-t border-zinc-800 p-6 flex-col gap-6 md:hidden shadow-2xl">
+            <a href="#about" class="mobile-nav-link text-lg font-bold hover:text-amber-500 uppercase tracking-wider">The
+                Band</a>
+            <a href="#media"
+                class="mobile-nav-link text-lg font-bold hover:text-amber-500 uppercase tracking-wider">Media Hub</a>
+            <a href="#experience"
+                class="mobile-nav-link text-lg font-bold hover:text-amber-500 uppercase tracking-wider">Live
+                Experience</a>
+            <a href="#contact"
+                class="mobile-nav-link w-full text-center py-4 bg-amber-600 text-white font-bold uppercase tracking-widest">
                 Book The Band
             </a>
         </div>
-        )}
     </nav>
 
-    {/* Hero Section */}
-    <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1470229722913-7ea995968f55?q=80&w=2070&auto=format&fit=crop"
-                alt="Band performing live with stage lights" className="w-full h-full object-cover opacity-50" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/30 to-black/70"></div>
-            {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-                style={{backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200'
-                xmlns='http://www.w3.org/2000/svg' %3E%3Cfilter id='noiseFilter' %3E%3CfeTurbulence type='fractalNoise'
-                baseFrequency='0.65' numOctaves='3' stitchTiles='stitch' /%3E%3C/filter%3E%3Crect width='100%25'
-                height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E")`}}></div>
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden hero-bg">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/30 to-black/70"></div>
+            <div class="absolute inset-0 grain-overlay"></div>
         </div>
 
-        <div
-            className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16 animate-in fade-in zoom-in duration-1000">
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16">
             <div
-                className="inline-flex items-center gap-2 px-3 py-1 border border-white/20 rounded-full bg-black/40 backdrop-blur-md mb-6">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-300">Booking 2025 Tour
-                    Dates</span>
+                class="inline-flex items-center gap-2 px-3 py-1 border border-white/20 rounded-full bg-black/40 backdrop-blur-md mb-6 animate-pulse">
+                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-300">Booking 2025 Tour Dates</span>
             </div>
 
             <h1
-                className="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter text-white mb-6 leading-none shadow-black drop-shadow-2xl">
-                Whiskey<span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-amber-700">Fix</span>
+                class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter text-white mb-6 leading-none shadow-black drop-shadow-2xl">
+                Whiskey<span class="text-gradient">Fix</span>
             </h1>
-            <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+            <p class="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
                 Professional High-Energy Rock & Blues. <br />
-                <span className="text-white font-medium">Tailored for Festivals, Corporate Events, and Premier
+                <span class="text-white font-medium">Tailored for Festivals, Corporate Events, and Premier
                     Venues.</span>
             </p>
 
-            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
                 <a href="#contact"
-                    className="w-full md:w-auto px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold uppercase tracking-widest transition-all transform hover:scale-105 shadow-lg shadow-amber-900/20 flex items-center justify-center gap-2 rounded-sm">
-                    <Calendar size={18} />
+                    class="w-full md:w-auto px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold uppercase tracking-widest transition-all transform hover:scale-[1.02] shadow-lg shadow-amber-900/20 flex items-center justify-center gap-2 rounded-sm">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
                     Inquire Now
                 </a>
                 <a href="#media"
-                    className="w-full md:w-auto px-8 py-4 border border-white/30 hover:border-white hover:bg-white/10 text-white font-bold uppercase tracking-widest transition-all backdrop-blur-sm flex items-center justify-center gap-2 rounded-sm">
-                    <Play size={18} />
+                    class="w-full md:w-auto px-8 py-4 border border-white/30 hover:border-white hover:bg-white/10 text-white font-bold uppercase tracking-widest transition-all backdrop-blur-sm flex items-center justify-center gap-2 rounded-sm">
+                    <i data-lucide="play" class="w-4 h-4"></i>
                     View EPK
                 </a>
             </div>
         </div>
     </header>
 
-    {/* About / Stats Section */}
-    <section id="about" className="py-20 bg-[#0a0a0a] border-b border-zinc-900">
-        <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                {/* Image Grid */}
-                <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+    <!-- About / Stats Section -->
+    <section id="about" class="py-20 bg-[#0a0a0a] border-b border-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Image Grid -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
                     <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1000&auto=format&fit=crop"
-                        className="rounded-sm grayscale hover:grayscale-0 transition-all duration-500 object-cover h-64 w-full"
-                        alt="Band member 1" />
+                        class="rounded-sm grayscale hover:grayscale-0 transition-all duration-500 object-cover h-64 w-full"
+                        alt="Band member 1"
+                        onerror="this.onerror=null;this.src='https://placehold.co/1000x800/171717/ffffff?text=Band+Member+1';" />
                     <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1000&auto=format&fit=crop"
-                        className="rounded-sm grayscale hover:grayscale-0 transition-all duration-500 object-cover h-64 w-full mt-8"
-                        alt="Band member 2" />
+                        class="rounded-sm grayscale hover:grayscale-0 transition-all duration-500 object-cover h-64 w-full mt-8"
+                        alt="Band member 2"
+                        onerror="this.onerror=null;this.src='https://placehold.co/1000x800/171717/ffffff?text=Band+Member+2';" />
                 </div>
 
-                <div className="lg:col-span-7">
-                    <h4 className="text-amber-600 font-bold tracking-widest uppercase mb-2">The Band</h4>
-                    <h2 className="text-4xl md:text-5xl font-black uppercase text-white mb-6 leading-tight">
+                <div class="lg:col-span-7">
+                    <h4 class="text-amber-600 font-bold tracking-widest uppercase mb-2">The Band</h4>
+                    <h2 class="text-4xl md:text-5xl font-black uppercase text-white mb-6 leading-tight">
                         Authentic. Professional. <br />Stage Ready.
                     </h2>
-                    <p className="text-gray-400 text-lg leading-relaxed mb-6">
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
                         Whiskey Fix bridges the gap between raw, authentic rock energy and professional event execution.
                         We aren't just a garage band; we are a polished musical collective with years of touring
                         experience.
                     </p>
-                    <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
                         From <strong>90-minute festival sets</strong> to <strong>4-hour corporate receptions</strong>,
                         we read the room and deliver exactly what the event needs—whether that's background blues or a
                         full-tilt rock anthem singalong.
                     </p>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-zinc-900">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-zinc-900">
                         <div>
-                            <div className="text-3xl font-black text-white">500+</div>
-                            <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">Shows Played</div>
+                            <div class="text-3xl font-black text-white">500+</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Shows Played</div>
                         </div>
                         <div>
-                            <div className="text-3xl font-black text-white">4hr</div>
-                            <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">Max Set Length</div>
+                            <div class="text-3xl font-black text-white">4hr</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Max Set Length</div>
                         </div>
                         <div>
-                            <div className="text-3xl font-black text-white">100%</div>
-                            <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">Pro Gear</div>
+                            <div class="text-3xl font-black text-white">100%</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Pro Gear</div>
                         </div>
                         <div>
-                            <div className="text-3xl font-black text-white">TN</div>
-                            <div className="text-xs text-gray-500 uppercase tracking-wider mt-1">Based / Travels</div>
+                            <div class="text-3xl font-black text-white">TN</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Based / Travels</div>
                         </div>
                     </div>
                 </div>
@@ -202,134 +202,136 @@ return (
         </div>
     </section>
 
-    {/* MEDIA HUB: Combined Audio & Video for organized layout */}
-    <section id="media" className="py-24 bg-zinc-950 relative">
-        <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-zinc-800 pb-6">
+    <!-- MEDIA HUB: Combined Audio & Video for organized layout -->
+    <section id="media" class="py-24 bg-zinc-950 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-zinc-800 pb-6">
                 <div>
-                    <span className="text-amber-600 font-bold tracking-widest uppercase">Media Hub</span>
-                    <h2 className="text-4xl md:text-5xl font-black uppercase text-white mt-2">Music & Video</h2>
+                    <span class="text-amber-600 font-bold tracking-widest uppercase">Media Hub</span>
+                    <h2 class="text-4xl md:text-5xl font-black uppercase text-white mt-2">Music & Video</h2>
                 </div>
-                <div className="flex gap-4 mt-4 md:mt-0">
-                    <button className="text-sm font-bold text-white border-b-2 border-amber-600 pb-1">All Media</button>
-                    <button className="text-sm font-bold text-zinc-500 hover:text-white transition-colors pb-1">EPK
-                        Download</button>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#media" class="text-sm font-bold text-white border-b-2 border-amber-600 pb-1">All Media</a>
+                    <a href="#contact"
+                        class="text-sm font-bold text-zinc-500 hover:text-white transition-colors pb-1">EPK Download</a>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
-                {/* LEFT COL: Discography & Video (Visuals) */}
-                <div className="lg:col-span-7 space-y-16">
+                <!-- LEFT COL: Discography & Video (Visuals) -->
+                <div class="lg:col-span-7 space-y-16">
 
-                    {/* Discography */}
+                    <!-- Discography -->
                     <div>
-                        <h3 className="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
-                            <Disc size={20} className="text-amber-600" /> Latest Releases
+                        <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
+                            <i data-lucide="disc" class="w-5 h-5 text-amber-600"></i> Latest Releases
                         </h3>
-                        <div className="grid grid-cols-3 gap-4">
-                            {albums.map((album, idx) => (
-                            <div key={idx} className="group cursor-pointer">
-                                <div className="overflow-hidden rounded-sm relative aspect-square mb-3">
-                                    <img src={album.img}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                        alt={album.title} />
+                        <div class="grid grid-cols-3 gap-4">
+                            <!-- Album 1 -->
+                            <div class="group cursor-pointer">
+                                <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
+                                    <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?q=80&w=1000&auto=format&fit=crop"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        alt="Grit & Gold Album Cover"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/171717/ffffff?text=Grit+%26+Gold';" />
                                     <div
-                                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <Play className="text-white fill-white" />
+                                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
                                     </div>
                                 </div>
-                                <h4 className="text-white font-bold text-sm leading-tight">{album.title}</h4>
-                                <p className="text-zinc-500 text-xs">{album.type}</p>
+                                <h4 class="text-white font-bold text-sm leading-tight">Grit & Gold</h4>
+                                <p class="text-zinc-500 text-xs">LP • 2024</p>
                             </div>
-                            ))}
+                            <!-- Album 2 -->
+                            <div class="group cursor-pointer">
+                                <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
+                                    <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        alt="Last Call Single Cover"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/171717/ffffff?text=Last+Call';" />
+                                    <div
+                                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+                                    </div>
+                                </div>
+                                <h4 class="text-white font-bold text-sm leading-tight">Last Call</h4>
+                                <p class="text-zinc-500 text-xs">Single • 2023</p>
+                            </div>
+                            <!-- Album 3 -->
+                            <div class="group cursor-pointer">
+                                <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
+                                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                        alt="Live Sessions EP Cover"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/400x400/171717/ffffff?text=Live+Sessions';" />
+                                    <div
+                                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <i data-lucide="play" class="w-6 h-6 text-white fill-white"></i>
+                                    </div>
+                                </div>
+                                <h4 class="text-white font-bold text-sm leading-tight">Live Sessions</h4>
+                                <p class="text-zinc-500 text-xs">EP • 2022</p>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Video Section Organized */}
+                    <!-- Video Section Organized -->
                     <div>
-                        <h3 className="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
-                            <Youtube size={20} className="text-amber-600" /> Featured Performance
+                        <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
+                            <i data-lucide="youtube" class="w-5 h-5 text-amber-600"></i> Featured Performance
                         </h3>
                         <div
-                            className="aspect-video bg-zinc-900 rounded-sm overflow-hidden relative group cursor-pointer shadow-2xl">
+                            class="aspect-video bg-zinc-900 rounded-sm overflow-hidden relative group cursor-pointer shadow-2xl">
                             <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=2070&auto=format&fit=crop"
-                                className="w-full h-full object-cover opacity-80" alt="Video cover" />
-                            <div className="absolute inset-0 flex items-center justify-center">
+                                class="w-full h-full object-cover opacity-80" alt="Live at The Ryman video cover"
+                                onerror="this.onerror=null;this.src='https://placehold.co/1000x562/171717/ffffff?text=Live+Performance+Video';" />
+                            <div class="absolute inset-0 flex items-center justify-center">
                                 <div
-                                    className="w-16 h-16 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
-                                    <Play size={28} fill="white" className="ml-1 text-white" />
+                                    class="w-16 h-16 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
+                                    <i data-lucide="play" class="w-7 h-7 fill-white ml-0.5 text-white"></i>
                                 </div>
                             </div>
-                            <div className="absolute bottom-4 left-4 bg-black/80 px-3 py-1 rounded-sm">
-                                <span className="text-white text-sm font-bold uppercase">Live at The Ryman (2024)</span>
+                            <div class="absolute bottom-4 left-4 bg-black/80 px-3 py-1 rounded-sm">
+                                <span class="text-white text-sm font-bold uppercase">Live at The Ryman (2024)</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                {/* RIGHT COL: Booking/Promoter Audio Player (Utility) */}
-                <div className="lg:col-span-5">
-                    <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6 sticky top-24">
-                        <div className="flex items-center justify-between mb-6">
+                <!-- RIGHT COL: Booking/Promoter Audio Player (Utility) -->
+                <div class="lg:col-span-5">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 lg:sticky lg:top-24">
+                        <div class="flex items-center justify-between mb-6">
                             <div>
-                                <h3 className="text-xl font-bold text-white uppercase">Audio Vault</h3>
-                                <p className="text-xs text-zinc-500 mt-1">Curated for Booking Agents</p>
+                                <h3 class="text-xl font-bold text-white uppercase">Audio Vault</h3>
+                                <p class="text-xs text-zinc-500 mt-1">Curated for Booking Agents</p>
                             </div>
-                            <Volume2 className="text-zinc-700" />
+                            <i data-lucide="volume-2" class="w-6 h-6 text-zinc-700"></i>
                         </div>
 
-                        {/* Tabs */}
-                        <div className="flex p-1 bg-black rounded-lg mb-6">
-                            <button onClick={()=> setActiveAudioTab('studio')}
-                                className={`flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all
-                                ${activeAudioTab === 'studio' ? 'bg-amber-600 text-white' : 'text-zinc-500
-                                hover:text-zinc-300'}`}
-                                >
+                        <!-- Tabs -->
+                        <div class="flex p-1 bg-black rounded-lg mb-6">
+                            <button data-tab="studio"
+                                class="audio-tab flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all bg-amber-600 text-white">
                                 Studio
                             </button>
-                            <button onClick={()=> setActiveAudioTab('live')}
-                                className={`flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all
-                                ${activeAudioTab === 'live' ? 'bg-amber-600 text-white' : 'text-zinc-500
-                                hover:text-zinc-300'}`}
-                                >
+                            <button data-tab="live"
+                                class="audio-tab flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all text-zinc-500 hover:text-zinc-300">
                                 Live Demos
                             </button>
                         </div>
 
-                        {/* Player List */}
-                        <div className="space-y-2">
-                            {currentTracks.map((track) => (
-                            <div key={track.id} className={`p-3 rounded-md flex items-center justify-between
-                                transition-colors ${playingTrack===track.id ? 'bg-zinc-800 border-l-2 border-amber-600'
-                                : 'bg-black/40 hover:bg-zinc-800' }`}>
-                                <div className="flex items-center gap-3">
-                                    <button onClick={()=> togglePlay(track.id)}
-                                        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all
-                                        ${playingTrack === track.id ? 'bg-amber-600 text-white' : 'bg-zinc-700
-                                        text-zinc-400 hover:bg-white hover:text-black'}`}
-                                        >
-                                        {playingTrack === track.id ?
-                                        <Pause size={12} fill="currentColor" /> :
-                                        <Play size={12} fill="currentColor" className="ml-0.5" />}
-                                    </button>
-                                    <div>
-                                        <h5 className={`text-sm font-bold leading-none ${playingTrack===track.id
-                                            ? 'text-amber-500' : 'text-gray-200' }`}>{track.title}</h5>
-                                        <span
-                                            className="text-[10px] text-zinc-500 uppercase tracking-wide">{track.type}</span>
-                                    </div>
-                                </div>
-                                <span className="text-xs text-zinc-600 font-mono">{track.duration}</span>
-                            </div>
-                            ))}
+                        <!-- Player List Container -->
+                        <div id="audio-list" class="space-y-2">
+                            <!-- Tracks rendered by JavaScript -->
                         </div>
 
-                        <div className="mt-6 pt-6 border-t border-zinc-800">
+                        <div class="mt-6 pt-6 border-t border-zinc-800">
                             <button
-                                className="w-full py-3 border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-widest rounded-sm flex items-center justify-center gap-2 transition-colors">
-                                <Download size={14} /> Download Full Audio Pack
+                                class="w-full py-3 border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-widest rounded-sm flex items-center justify-center gap-2 transition-colors">
+                                <i data-lucide="download" class="w-4 h-4"></i> Download Full Audio Pack
                             </button>
                         </div>
                     </div>
@@ -339,166 +341,305 @@ return (
         </div>
     </section>
 
-    {/* Live Experience & Setlist */}
-    <section id="experience" className="py-24 bg-[#0a0a0a] border-t border-zinc-900">
-        <div className="container mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-16">
-                <span className="text-amber-600 font-bold tracking-widest uppercase">The Show</span>
-                <h2 className="text-4xl md:text-5xl font-black text-white mt-2 uppercase">Performance Style</h2>
-                <p className="text-gray-400 mt-6 text-lg">We specialize in high-energy sets that keep patrons engaged.
-                    Our repertoire spans decades, allowing us to pivot from classic rock anthems to modern alt-rock hits
+    <!-- Live Experience & Setlist -->
+    <section id="experience" class="py-24 bg-[#0a0a0a] border-t border-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-amber-600 font-bold tracking-widest uppercase">The Show</span>
+                <h2 class="text-4xl md:text-5xl font-black text-white mt-2 uppercase">Performance Style</h2>
+                <p class="text-gray-400 mt-6 text-lg">We specialize in high-energy sets that keep patrons engaged. Our
+                    repertoire spans decades, allowing us to pivot from classic rock anthems to modern alt-rock hits
                     instantly.</p>
             </div>
 
-            {/* Vibe Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-1 mb-16">
+            <!-- Vibe Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-1 mb-16 rounded-sm overflow-hidden border border-zinc-900">
                 <div
-                    className="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
-                    <Mic2 size={32} className="mx-auto text-amber-600 mb-4" />
-                    <h3 className="text-white font-bold text-xl uppercase mb-2">Crowd Interaction</h3>
-                    <p className="text-sm text-gray-500">We don't just play at them; we play with them. Sing-alongs and
+                    class="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
+                    <i data-lucide="mic-2" class="w-8 h-8 mx-auto text-amber-600 mb-4"></i>
+                    <h3 class="text-white font-bold text-xl uppercase mb-2">Crowd Interaction</h3>
+                    <p class="text-sm text-gray-500">We don't just play at them; we play with them. Sing-alongs and
                         engagement are standard.</p>
                 </div>
                 <div
-                    className="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
-                    <Music size={32} className="mx-auto text-amber-600 mb-4" />
-                    <h3 className="text-white font-bold text-xl uppercase mb-2">Genre Fluidity</h3>
-                    <p className="text-sm text-gray-500">From Rolling Stones to Foo Fighters, we curate the setlist to
-                        match the venue's vibe.</p>
+                    class="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
+                    <i data-lucide="music" class="w-8 h-8 mx-auto text-amber-600 mb-4"></i>
+                    <h3 class="text-white font-bold text-xl uppercase mb-2">Genre Fluidity</h3>
+                    <p class="text-sm text-gray-500">From Rolling Stones to Foo Fighters, we curate the setlist to match
+                        the venue's vibe.</p>
                 </div>
                 <div
-                    className="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
-                    <CheckCircle size={32} className="mx-auto text-amber-600 mb-4" />
-                    <h3 className="text-white font-bold text-xl uppercase mb-2">Volume Control</h3>
-                    <p className="text-sm text-gray-500">Professional dynamic management suitable for dinner sets or
+                    class="bg-zinc-900 p-8 text-center hover:bg-zinc-800 transition-colors cursor-default border-t-2 border-transparent hover:border-amber-600">
+                    <i data-lucide="check-circle" class="w-8 h-8 mx-auto text-amber-600 mb-4"></i>
+                    <h3 class="text-white font-bold text-xl uppercase mb-2">Volume Control</h3>
+                    <p class="text-sm text-gray-500">Professional dynamic management suitable for dinner sets or
                         late-night ragers.</p>
                 </div>
             </div>
 
-            {/* Setlist Dropdown - Critical for Booking */}
-            <div className="max-w-2xl mx-auto">
-                <button onClick={()=> setSetlistOpen(!setlistOpen)}
-                    className="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-8 py-6 flex items-center
-                    justify-between group transition-all"
-                    >
-                    <div className="flex items-center gap-4">
+            <!-- Setlist Dropdown - Critical for Booking -->
+            <div class="max-w-2xl mx-auto">
+                <button id="setlist-toggle"
+                    class="w-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-8 py-6 flex items-center justify-between group transition-all rounded-sm">
+                    <div class="flex items-center gap-4">
                         <div
-                            className="w-10 h-10 bg-black rounded-full flex items-center justify-center border border-zinc-700">
-                            <FileText size={20} className="text-amber-600" />
+                            class="w-10 h-10 bg-black rounded-full flex items-center justify-center border border-zinc-700">
+                            <i data-lucide="file-text" class="w-5 h-5 text-amber-600"></i>
                         </div>
-                        <div className="text-left">
-                            <h4 className="text-white font-bold uppercase tracking-wider text-lg">View Sample Setlist
-                            </h4>
-                            <p className="text-zinc-500 text-xs">See what we play live</p>
+                        <div class="text-left">
+                            <h4 class="text-white font-bold uppercase tracking-wider text-lg">View Sample Setlist</h4>
+                            <p class="text-zinc-500 text-xs">See what we play live</p>
                         </div>
                     </div>
-                    {setlistOpen ?
-                    <ChevronUp className="text-white" /> :
-                    <ChevronDown className="text-white group-hover:translate-y-1 transition-transform" />}
+                    <i id="setlist-icon" data-lucide="chevron-down"
+                        class="w-6 h-6 text-white group-hover:translate-y-1 transition-transform"></i>
                 </button>
 
-                {setlistOpen && (
-                <div className="bg-black border-x border-b border-zinc-800 p-8 animate-in slide-in-from-top-2">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div id="setlist-content" class="hidden bg-black border-x border-b border-zinc-800 p-8 rounded-b-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h5 className="text-amber-600 font-bold uppercase text-xs tracking-widest mb-4">Classic Rock
+                            <h5 class="text-amber-600 font-bold uppercase text-xs tracking-widest mb-4">Classic Rock
                             </h5>
-                            <ul className="text-gray-400 text-sm space-y-2">
-                                <li>Rolling Stones - Gimme Shelter</li>
-                                <li>Led Zeppelin - Ramble On</li>
-                                <li>Tom Petty - Refugee</li>
-                                <li>Allman Brothers - Midnight Rider</li>
+                            <ul class="text-gray-400 text-sm space-y-2 list-none p-0">
+                                <li>- Rolling Stones - Gimme Shelter</li>
+                                <li>- Led Zeppelin - Ramble On</li>
+                                <li>- Tom Petty - Refugee</li>
+                                <li>- Allman Brothers - Midnight Rider</li>
                             </ul>
                         </div>
                         <div>
-                            <h5 className="text-amber-600 font-bold uppercase text-xs tracking-widest mb-4">90s /
+                            <h5 class="text-amber-600 font-bold uppercase text-xs tracking-widest mb-4">90s /
                                 Alternative</h5>
-                            <ul className="text-gray-400 text-sm space-y-2">
-                                <li>Pearl Jam - Alive</li>
-                                <li>Foo Fighters - Everlong</li>
-                                <li>The Black Keys - Gold on the Ceiling</li>
-                                <li>Stone Temple Pilots - Plush</li>
+                            <ul class="text-gray-400 text-sm space-y-2 list-none p-0">
+                                <li>- Pearl Jam - Alive</li>
+                                <li>- Foo Fighters - Everlong</li>
+                                <li>- The Black Keys - Gold on the Ceiling</li>
+                                <li>- Stone Temple Pilots - Plush</li>
                             </ul>
                         </div>
                     </div>
-                    <div className="mt-6 pt-6 border-t border-zinc-800 text-center">
-                        <p className="text-zinc-500 text-xs italic">Plus originals and requested favorites.</p>
+                    <div class="mt-6 pt-6 border-t border-zinc-800 text-center">
+                        <p class="text-zinc-500 text-xs italic">Plus originals and requested favorites.</p>
                     </div>
                 </div>
-                )}
             </div>
         </div>
     </section>
 
-    {/* Booking CTA - Clean & Professional */}
-    <section id="contact" className="py-32 relative bg-amber-700 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 mix-blend-multiply bg-zinc-900">
+    <!-- Booking CTA - Clean & Professional -->
+    <section id="contact" class="py-32 relative bg-amber-700 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 mix-blend-multiply bg-zinc-900">
             <img src="https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=2070&auto=format&fit=crop"
-                className="w-full h-full object-cover opacity-20 grayscale" alt="Background texture" />
+                class="w-full h-full object-cover opacity-20 grayscale" alt="Live stage lights background"
+                onerror="this.onerror=null;this.src='https://placehold.co/2070x1000/171717/ffffff?text=Stage+Lights';" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-6xl font-black text-white uppercase mb-6 drop-shadow-xl">
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-black text-white uppercase mb-6 drop-shadow-xl">
                 Let's Pack The Venue.
             </h2>
-            <p className="text-lg md:text-xl text-amber-100 max-w-2xl mx-auto mb-10 font-light">
-                Booking inquiries for <span className="font-bold text-white">2025</span> are now open.
+            <p class="text-lg md:text-xl text-amber-100 max-w-2xl mx-auto mb-10 font-light">
+                Booking inquiries for <span class="font-bold text-white">2025</span> are now open.
             </p>
-            <div className="flex flex-col md:flex-row justify-center gap-4">
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="mailto:booking@whiskeyfix.com"
+                    class="px-10 py-4 bg-white text-black hover:bg-gray-200 font-black text-sm md:text-base uppercase tracking-widest rounded-sm transition-transform hover:-translate-y-1 shadow-2xl flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Contact Management
+                </a>
                 <button
-                    className="px-10 py-4 bg-white text-black hover:bg-gray-200 font-black text-sm md:text-base uppercase tracking-widest rounded-sm transition-transform hover:-translate-y-1 shadow-2xl flex items-center justify-center gap-2">
-                    <Mail size={18} /> Contact Management
-                </button>
-                <button
-                    className="px-10 py-4 border-2 border-white text-white hover:bg-white/10 font-bold text-sm md:text-base uppercase tracking-widest rounded-sm transition-colors flex items-center justify-center gap-2">
-                    <Download size={18} /> Tech Rider & Stage Plot
+                    class="px-10 py-4 border-2 border-white text-white hover:bg-white/10 font-bold text-sm md:text-base uppercase tracking-widest rounded-sm transition-colors flex items-center justify-center gap-2"
+                    onclick="console.log('Mock download started: Tech Rider PDF.')">
+                    <i data-lucide="download" class="w-4 h-4"></i> Tech Rider & Stage Plot
                 </button>
             </div>
         </div>
     </section>
 
-    {/* Footer */}
-    <footer className="bg-black text-zinc-500 py-12 border-t border-zinc-900">
-        <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+    <!-- Footer -->
+    <footer class="bg-black text-zinc-500 py-12 border-t border-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
 
-                <div className="text-center md:text-left">
-                    <span className="text-2xl font-black tracking-tighter uppercase text-white">
-                        Whiskey<span className="text-amber-600">Fix</span>
+                <div class="text-center md:text-left">
+                    <span class="text-2xl font-black tracking-tighter uppercase text-white">
+                        Whiskey<span class="text-amber-600">Fix</span>
                     </span>
-                    <p className="text-xs mt-2">Nashville, TN • Est. 2018</p>
+                    <p class="text-xs mt-2">Nashville, TN • Est. 2018</p>
                 </div>
 
-                <div className="flex gap-6">
-                    <a href="#" className="hover:text-amber-600 transition-colors">
-                        <Instagram size={24} />
-                    </a>
-                    <a href="#" className="hover:text-amber-600 transition-colors">
-                        <Facebook size={24} />
-                    </a>
-                    <a href="#" className="hover:text-amber-600 transition-colors">
-                        <Youtube size={24} />
-                    </a>
-                    <a href="#" className="hover:text-amber-600 transition-colors">
-                        <Mail size={24} />
-                    </a>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-amber-600 transition-colors"><i data-lucide="instagram"
+                            class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-amber-600 transition-colors"><i data-lucide="facebook"
+                            class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-amber-600 transition-colors"><i data-lucide="youtube"
+                            class="w-6 h-6"></i></a>
+                    <a href="mailto:info@whiskeyfix.com" class="hover:text-amber-600 transition-colors"><i
+                            data-lucide="mail" class="w-6 h-6"></i></a>
                 </div>
 
             </div>
 
             <div
-                className="border-t border-zinc-900 mt-8 pt-8 flex flex-col md:flex-row justify-between text-xs text-zinc-600 gap-4">
+                class="border-t border-zinc-900 mt-8 pt-8 flex flex-col md:flex-row justify-between text-xs text-zinc-600 gap-4">
                 <p>&copy; 2025 Whiskey Fix Band. All Rights Reserved.</p>
-                <div className="flex gap-4">
-                    <a href="#" className="hover:text-zinc-400">Privacy Policy</a>
-                    <a href="#" className="hover:text-zinc-400">Terms of Service</a>
-                    <a href="#" className="hover:text-zinc-400">Press Kit</a>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-zinc-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-zinc-400">Terms of Service</a>
+                    <a href="#" class="hover:text-zinc-400">Press Kit</a>
                 </div>
             </div>
         </div>
     </footer>
-</div>
-);
-};
 
-export default App;
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Data Definitions
+        const studioTracks = [
+            { id: 1, title: "Midnight Rambler", duration: "3:45", type: "Original" },
+            { id: 2, title: "Whiskey River", duration: "4:12", type: "Original" },
+            { id: 3, title: "Hard to Handle", duration: "3:30", type: "Cover" }
+        ];
+
+        const liveTracks = [
+            { id: 4, title: "Live at The Mercury (Crowd Demo)", duration: "4:05", type: "Live Board Feed" },
+            { id: 5, title: "Mustang Sally (Live Improv)", duration: "5:20", type: "Audience Rec" },
+            { id: 6, title: "Festival Soundcheck 2024", duration: "2:15", type: "Soundcheck" }
+        ];
+
+        let activeAudioTab = 'studio';
+        let playingTrack = null;
+
+        // --- DOM Elements ---
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const audioTabs = document.querySelectorAll('.audio-tab');
+        const audioListContainer = document.getElementById('audio-list');
+        const setlistToggle = document.getElementById('setlist-toggle');
+        const setlistContent = document.getElementById('setlist-content');
+        const setlistIcon = document.getElementById('setlist-icon');
+
+        // --- Functions ---
+
+        /** Renders the list of tracks based on the active tab. */
+        function renderAudioList() {
+            const tracks = activeAudioTab === 'studio' ? studioTracks : liveTracks;
+            audioListContainer.innerHTML = tracks.map(track => {
+                const isPlaying = playingTrack === track.id;
+                const buttonIcon = isPlaying ? 'pause' : 'play';
+                const buttonBg = isPlaying ? 'bg-amber-600 text-white' : 'bg-zinc-700 text-zinc-400 hover:bg-white hover:text-black';
+                const trackStyle = isPlaying ? 'bg-zinc-800 border-l-2 border-amber-600' : 'bg-black/40 hover:bg-zinc-800';
+                const titleColor = isPlaying ? 'text-amber-500' : 'text-gray-200';
+
+                return `
+                    <div class="track-item p-3 rounded-md flex items-center justify-between transition-colors ${trackStyle}" data-track-id="${track.id}">
+                        <div class="flex items-center gap-3">
+                            <button onclick="togglePlay(${track.id})" class="w-8 h-8 rounded-full flex items-center justify-center transition-all ${buttonBg}">
+                                <i data-lucide="${buttonIcon}" class="w-3 h-3 ${buttonIcon === 'play' ? 'ml-0.5' : ''} fill-current"></i>
+                            </button>
+                            <div>
+                                <h5 class="text-sm font-bold leading-none ${titleColor}">${track.title}</h5>
+                                <span class="text-[10px] text-zinc-500 uppercase tracking-wide">${track.type}</span>
+                            </div>
+                        </div>
+                        <span class="text-xs text-zinc-600 font-mono">${track.duration}</span>
+                    </div>
+                `;
+            }).join('');
+            // Re-render Lucide icons after injecting new HTML
+            lucide.createIcons();
+        }
+
+        /** Toggles the playing state of a track. */
+        window.togglePlay = (trackId) => {
+            playingTrack = playingTrack === trackId ? null : trackId;
+            // In a real app, you would start/stop an actual audio element here
+            console.log(playingTrack ? `Playing track ID: ${playingTrack}` : `Stopped playback.`);
+            renderAudioList();
+        }
+
+        /** Handles tab switching in the Audio Vault. */
+        function handleTabSwitch(event) {
+            const newTab = event.currentTarget.getAttribute('data-tab');
+            if (activeAudioTab === newTab) return;
+
+            activeAudioTab = newTab;
+            playingTrack = null; // Reset playing track on tab switch
+
+            // Update button styles
+            audioTabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === newTab) {
+                    tab.classList.remove('text-zinc-500', 'hover:text-zinc-300');
+                    tab.classList.add('bg-amber-600', 'text-white');
+                } else {
+                    tab.classList.remove('bg-amber-600', 'text-white');
+                    tab.classList.add('text-zinc-500', 'hover:text-zinc-300');
+                }
+            });
+
+            renderAudioList();
+        }
+
+        // --- Event Listeners ---
+
+        // 1. Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            const iconName = mobileMenu.classList.contains('flex') ? 'x' : 'menu';
+            mobileMenuBtn.innerHTML = `<i data-lucide="${iconName}" class="w-6 h-6"></i>`;
+            lucide.createIcons();
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                mobileMenuBtn.innerHTML = `<i data-lucide="menu" class="w-6 h-6"></i>`;
+                lucide.createIcons();
+            });
+        });
+
+        // 2. Sticky Nav Style
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-3', 'border-b', 'border-zinc-800');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('bg-black/95', 'backdrop-blur-sm', 'shadow-lg', 'py-3', 'border-b', 'border-zinc-800');
+                navbar.classList.add('bg-transparent', 'py-6');
+            }
+        });
+
+        // 3. Audio Tab Handlers
+        audioTabs.forEach(tab => {
+            tab.addEventListener('click', handleTabSwitch);
+        });
+
+        // 4. Setlist Toggle
+        setlistToggle.addEventListener('click', () => {
+            const isHidden = setlistContent.classList.toggle('hidden');
+            if (isHidden) {
+                setlistIcon.setAttribute('data-lucide', 'chevron-down');
+            } else {
+                setlistIcon.setAttribute('data-lucide', 'chevron-up');
+            }
+            // Re-render the icon change
+            lucide.createIcons();
+        });
+
+        // Initial setup on load
+        window.onload = function () {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Render the initial audio list
+            renderAudioList();
+        };
+
+    </script>
+</body>
+
+</html>
