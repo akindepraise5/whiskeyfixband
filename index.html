@@ -223,17 +223,56 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:col-span-12 gap-12">
+            <div class="flex flex-col gap-16">
 
-                <!-- LEFT COL: Discography & Video (Visuals) -->
-                <div class="lg:col-span-7 space-y-16">
+                <!-- CENTERED: Booking/Promoter Audio Player (Utility) -->
+                <div class="w-full max-w-5xl mx-auto">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 lg:p-10 shadow-2xl">
+                        <div class="text-center mb-8">
+                            <h3
+                                class="text-2xl font-black text-white uppercase tracking-wider flex items-center justify-center gap-3">
+                                <i data-lucide="volume-2" class="w-6 h-6 text-amber-600"></i>
+                                Audio Vault
+                            </h3>
+                            <p class="text-sm text-zinc-500 mt-2 font-medium tracking-wide">Curated High-Fidelity Audio
+                                for Booking Agents</p>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="flex p-1 bg-black rounded-lg mb-6 max-w-lg mx-auto border border-zinc-800">
+                            <button data-tab="studio"
+                                class="audio-tab flex-1 py-3 text-xs md:text-sm font-bold uppercase rounded-md transition-all bg-amber-600 text-white">
+                                Studio
+                            </button>
+                            <button data-tab="live"
+                                class="audio-tab flex-1 py-3 text-xs md:text-sm font-bold uppercase rounded-md transition-all text-zinc-500 hover:text-zinc-300">
+                                Live Demos
+                            </button>
+                        </div>
+
+                        <!-- Player List Container -->
+                        <div id="audio-list" class="space-y-3 max-w-3xl mx-auto">
+                            <!-- Tracks rendered by JavaScript -->
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-zinc-800 max-w-3xl mx-auto">
+                            <button
+                                class="w-full py-4 border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-widest rounded-sm flex items-center justify-center gap-2 transition-colors">
+                                <i data-lucide="download" class="w-4 h-4"></i> Download Full Audio Pack
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM GRID: Discography & Video (Visuals) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
                     <!-- Discography -->
-                    <div>
+                    <div class="lg:col-span-5">
                         <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
                             <i data-lucide="disc" class="w-5 h-5 text-amber-600"></i> Latest Releases
                         </h3>
-                        <div class="grid grid-cols-3 gap-4">
+                        <div class="grid grid-cols-2 gap-4">
                             <!-- Album 1 -->
                             <div class="group cursor-pointer">
                                 <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
@@ -264,8 +303,8 @@
                                 <h4 class="text-white font-bold text-sm leading-tight">Last Call</h4>
                                 <p class="text-zinc-500 text-xs">Single • 2023</p>
                             </div>
-                            <!-- Album 3 -->
-                            <div class="group cursor-pointer">
+                            <!-- Album 3 (Hidden on mobile or squeezed? Let's keep 2 cols or move to carousel later if needed. For now 2 cols is cleaner than 3 small ones in this space) -->
+                            <div class="group cursor-pointer hidden md:block">
                                 <div class="overflow-hidden rounded-sm relative aspect-square mb-3 shadow-lg">
                                     <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1000&auto=format&fit=crop"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -282,8 +321,8 @@
                         </div>
                     </div>
 
-                    <!-- Video Section Organized -->
-                    <div>
+                    <!-- Video Section -->
+                    <div class="lg:col-span-7">
                         <h3 class="text-xl font-bold text-white uppercase mb-6 flex items-center gap-2">
                             <i data-lucide="youtube" class="w-5 h-5 text-amber-600"></i> Featured Performance
                         </h3>
@@ -294,55 +333,19 @@
                                 onerror="this.onerror=null;this.src='https://placehold.co/1000x562/171717/ffffff?text=Live+Performance+Video';" />
                             <div class="absolute inset-0 flex items-center justify-center">
                                 <div
-                                    class="w-16 h-16 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
-                                    <i data-lucide="play" class="w-7 h-7 fill-white ml-0.5 text-white"></i>
+                                    class="w-20 h-20 bg-amber-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-amber-600 transition-colors shadow-lg">
+                                    <i data-lucide="play" class="w-8 h-8 fill-white ml-1 text-white"></i>
                                 </div>
                             </div>
-                            <div class="absolute bottom-4 left-4 bg-black/80 px-3 py-1 rounded-sm">
-                                <span class="text-white text-sm font-bold uppercase">Live at The Ryman (2024)</span>
+                            <div
+                                class="absolute bottom-6 left-6 bg-black/80 px-4 py-2 rounded-sm border-l-4 border-amber-600">
+                                <span class="text-white text-base font-bold uppercase tracking-wider">Live at The Ryman
+                                    (2024)</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-
-                <!-- RIGHT COL: Booking/Promoter Audio Player (Utility) -->
-                <div class="lg:col-span-5">
-                    <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-6 lg:sticky lg:top-24">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 class="text-xl font-bold text-white uppercase">Audio Vault</h3>
-                                <p class="text-xs text-zinc-500 mt-1">Curated for Booking Agents</p>
-                            </div>
-                            <i data-lucide="volume-2" class="w-6 h-6 text-zinc-700"></i>
-                        </div>
-
-                        <!-- Tabs -->
-                        <div class="flex p-1 bg-black rounded-lg mb-6">
-                            <button data-tab="studio"
-                                class="audio-tab flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all bg-amber-600 text-white">
-                                Studio
-                            </button>
-                            <button data-tab="live"
-                                class="audio-tab flex-1 py-2 text-xs font-bold uppercase rounded-md transition-all text-zinc-500 hover:text-zinc-300">
-                                Live Demos
-                            </button>
-                        </div>
-
-                        <!-- Player List Container -->
-                        <div id="audio-list" class="space-y-2">
-                            <!-- Tracks rendered by JavaScript -->
-                        </div>
-
-                        <div class="mt-6 pt-6 border-t border-zinc-800">
-                            <button
-                                class="w-full py-3 border border-zinc-700 hover:bg-zinc-800 text-zinc-400 hover:text-white text-xs font-bold uppercase tracking-widest rounded-sm flex items-center justify-center gap-2 transition-colors">
-                                <i data-lucide="download" class="w-4 h-4"></i> Download Full Audio Pack
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
